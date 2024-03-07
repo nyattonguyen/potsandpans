@@ -1,0 +1,127 @@
+.carousel-brand-container img.brand-logo {
+  max-width: 30%; /* Điều chỉnh kích thước của hình ảnh */
+  margin: 0 65px; /* Thêm khoảng cách giữa các hình ảnh */
+  height: auto; /* Đảm bảo hình ảnh không bị méo */
+  object-fit: contain; /* Đảm bảo hình ảnh fit đẹp với kích thước đã đặt */
+}
+
+.carousel-brand-container {
+  justify-content: center;
+}
+
+/* Tùy chỉnh nút điều hướng Carousel */
+.carousel-control-prev,
+.carousel-control-next {
+  filter: invert(50%) sepia(100%) saturate(300%) hue-rotate(150deg)
+    brightness(100%) contrast(100%);
+}
+
+/* Tùy chỉnh icon trong nút điều hướng */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%)
+    contrast(103%);
+}
+
+.product-info {
+  display: flex;
+  align-items: center; /* Căn giữa các items theo chiều dọc */
+  justify-content: space-between; /* Phân bổ đều khoảng cách giữa các items */
+  padding: 0 10%; /* Thêm padding vào hai bên để giữa hình ảnh và mô tả không dính sát vào cạnh */
+}
+
+.product-info img {
+  width: auto; /* Đặt chiều rộng tự động để giữ nguyên tỷ lệ hình ảnh */
+  max-width: 40%; /* Giới hạn kích thước tối đa của hình ảnh */
+  height: auto; /* Đặt chiều cao tự động để giữ nguyên tỷ lệ hình ảnh */
+}
+
+.shop-now-btn {
+  background-color: #007bff; /* Màu nền xanh dương */
+  color: white; /* Màu chữ trắng */
+  border: none; /* Không viền */
+  padding: 10px 20px; /* Padding cho nút */
+  margin-top: 10px; /* Khoảng cách phía trên nút */
+  cursor: pointer; /* Con trỏ chuột khi di chuyển vào nút */
+  border-radius: 5px; /* Bo góc cho nút */
+}
+
+.shop-now-btn:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+}
+
+.youtube-video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.youtube-video-container iframe,
+.youtube-video-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 515px;
+}
+
+/* Responsive design cho product-info trên thiết bị có chiều rộng nhỏ hơn 768px */
+@media (max-width: 768px) {
+  .product-info {
+    flex-direction: column; /* Chuyển từ hàng ngang sang hàng dọc */
+    align-items: center; /* Căn giữa các items theo chiều ngang */
+    text-align: center; /* Căn giữa văn bản */
+  }
+
+  .product-info img {
+    max-width: 80%; /* Tăng kích thước tối đa của hình ảnh để phù hợp với màn hình nhỏ */
+    margin-bottom: 20px; /* Thêm khoảng cách giữa hình ảnh và mô tả */
+  }
+
+  .product-info > div {
+    width: 100%; /* Cho phần mô tả chiếm toàn bộ chiều rộng */
+    max-width: 100%; /* Đảm bảo không vượt quá chiều rộng của container */
+  }
+}
+
+.button-custom {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  color: #fff;
+  margin-top: 20px;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.15rem;
+  transition: all 0.3s;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.button-custom:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #7a99a3;
+  z-index: -2;
+}
+.button-custom:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #1d423c;
+  transition: all cubic-bezier(0.4, 0, 1, 1) 0.3s;
+  z-index: -1;
+}
+.button-custom:hover {
+  color: #fff;
+}
+.button-custom:hover:before {
+  width: 100%;
+}

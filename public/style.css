@@ -1,0 +1,10 @@
+.customCol {
+  text-align: left;
+  padding: 100px;
+}
+
+@media (max-width: 767px) {
+  .customCol {
+    padding: 45px;
+  }
+}

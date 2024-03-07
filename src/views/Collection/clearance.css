@@ -1,0 +1,39 @@
+.dot {
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+  }
+
+
+  .my-pagination .page-link {
+    color: #000; /* Đặt màu chữ */
+    background-color: #fff; /* Màu nền cho các nút */
+    border: none; /* Loại bỏ viền */
+  }
+  
+  .my-pagination .page-item.active .page-link {
+    background-color: #000; /* Màu nền cho nút trang hiện tại */
+    color: #fff; /* Màu chữ cho nút trang hiện tại */
+  }
+  
+  .my-pagination .page-item.disabled .page-link {
+    color: #6c757d; /* Màu chữ cho nút bị vô hiệu hóa */
+  }
+  
+  .my-pagination .page-item:not(.disabled):hover .page-link {
+    background-color: #e9ecef; /* Màu nền khi hover vào nút không bị vô hiệu hóa */
+  }
+  
+  .my-pagination .page-item:first-child .page-link {
+    margin-right: 5px; /* Khoảng cách giữa nút đầu tiên và nút tiếp theo */
+  }
+  
+  .my-pagination .page-item:last-child .page-link {
+    margin-left: 5px; /* Khoảng cách giữa nút cuối cùng và nút trước đó */
+  }
+  
+  .my-pagination .page-item .page-link {
+    border-radius: 0; /* Loại bỏ viền bo tròn */
+  }

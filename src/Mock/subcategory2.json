@@ -1,0 +1,283 @@
+{
+  "data": [
+    {
+      "header": "Anolon",
+      "title": "COOKWARE",
+      "listitem": [
+        "Cookware Sets",
+        "Casseroles and Dutch Ovens",
+        "Griddles and Grill Pans",
+        "Roasters",
+        "Saucepans and Saucepots",
+        "Sautés and Frying Pans",
+        "Stockpots and Steamers",
+        "Woks and Stir Frys"
+      ]
+    },
+    {
+      "header": "Anolon",
+      "title": "BAKEWARE",
+      "listitem": [
+        "Bakeware Sets",
+        "Baking Sheets and Crisper Pans",
+        "Cake and Fluted Cake Pans",
+        "Loaf and Muffin Pans"
+      ]
+    },
+    {
+      "header": "Anolon",
+      "title": "MATERIAL",
+      "listitem": [
+        "Forged Hard Anodized Nonstick",
+        "Hard Anodized Nonstick",
+        "Stainless Steel",
+        "Stainless Steel Clad"
+      ]
+    },
+    {
+      "header": "AYESHA CURRY",
+      "title": "AYESHA'S FAVORITES",
+      "listitem": ["Cast Iron", "Bacon Grease Cans", ""]
+    },
+    {
+      "header": "AYESHA CURRY",
+      "title": "COOKWARE",
+      "listitem": [
+        "Cookware Sets",
+        "Skillets, Frying Pans, and Sautés",
+        "Stockpots and Saucepots",
+        "Saucepans",
+        "Grill Pans and Griddles",
+        "Dutch Ovens",
+        "Cast Iron"
+      ]
+    },
+    {
+      "header": "AYESHA CURRY",
+      "title": "BAKEWARE",
+      "listitem": [
+        "Bakeware Sets",
+        "Cookie and Baking Sheets",
+        "Ceramic Bakers"
+      ]
+    },
+    {
+      "header": "AYESHA CURRY",
+      "title": "TOOLS AND ACCESSORIES",
+      "listitem": ["Tools", "Pantryware"]
+    },
+    {
+      "header": "BONJOUR",
+      "title": "COFFEE",
+      "listitem": ["French Presses", "Coffee Makers"]
+    },
+    {
+      "header": "BONJOUR",
+      "title": "ACCESSORIES",
+      "listitem": ["Frothers", "Glassware", "Chef's Tools", "Serveware"]
+    },
+    {
+      "header": "BONJOUR",
+      "title": "REPLACEMENTS",
+      "listitem": ["French Press Carafes"]
+    },
+    {
+      "header": "BONJOUR",
+      "title": "TEA",
+      "listitem": ["Teapots"]
+    },
+    {
+      "header": "CIRCULON",
+      "title": "COOKWARE",
+      "listitem": [
+        "Cookware Sets",
+        "Casseroles and Dutch Ovens",
+        "Frying Pans and Sauté Pans",
+        "Grills and Griddles",
+        "Saucepans, Stockpots, and Steamers",
+        "Stir Fry Pans and Woks"
+      ]
+    },
+    {
+      "header": "CIRCULON",
+      "title": "BAKEWARE",
+      "listitem": [
+        "Bakeware Sets",
+        "Baking Sheets",
+        "Cake Pans",
+        "Loaf and Muffin Pans"
+      ]
+    },
+    {
+      "header": "CIRCULON",
+      "title": "SIGNATURE COLLECTIONS",
+      "listitem": ["A1 Scratchdefense", "Momentum", "Symmetry"]
+    },
+    {
+      "header": "CIRCULON",
+      "title": "ACCESSORIES & MORE",
+      "listitem": ["Teakettles", "Kitchen Tools"]
+    },
+    {
+      "header": "FARBERWARE",
+      "title": "COOKWARE",
+      "listitem": [
+        "Cookware Sets",
+        "Griddles and Grill Pans",
+        "Roasters",
+        "Saucepans and Saucepots",
+        "Sautés and Frying Pans",
+        "Stockpots and Steamers"
+      ]
+    },
+    {
+      "header": "FARBERWARE",
+      "title": "BAKEWARE",
+      "listitem": [
+        "Bakeware Sets",
+        "Baking Sheets and Crisper Pans",
+        "Cake and Fluted Cake Pans",
+        "Loaf and Muffin Pans"
+      ]
+    },
+    {
+      "header": "FARBERWARE",
+      "title": "HOT BEVERAGES",
+      "listitem": ["Percolators"]
+    },
+    {
+      "header": "FARBERWARE",
+      "title": "FEATURE COLLECTIONS",
+      "listitem": ["Farberware Easy Solutions"]
+    },
+    {
+      "header": "KITCHENAID",
+      "title": "COOKWARE",
+      "listitem": [
+        "Cookware Sets",
+        "Frying Pans, Grill Pans, and Woks",
+        "Stockpots & Steamers",
+        "Dutch Ovens & Casseroles",
+        "Roasters"
+      ]
+    },
+    {
+      "header": "KITCHENAID",
+      "title": "COLLECTIONS",
+      "listitem": [
+        "Hard-Anodized",
+        "Hard-Anodized Ceramic",
+        "Hard-Anodized Induction",
+        "NITRO Carbon Steel",
+        "Stainless Steel",
+        "Stainless Steel 3-Ply Base",
+        "Stainless Steel 5-Ply Clad",
+        "Cast Iron"
+      ]
+    },
+    {
+      "header": "KITCHENAID",
+      "title": "TOOLS & ACCESSORIES",
+      "listitem": ["Teakettles"]
+    },
+    {
+      "header": "KITCHENAID",
+      "title": "FEATURED",
+      "listitem": ["NITRO Carbon Steel", "Hard-Anodized Ceramic"]
+    },
+    {
+      "header": "LOCKNLOCK",
+      "title": "BPA FREE PLASTIC",
+      "listitem": [
+        "Container Sets",
+        "Essentials Shapes",
+        "Specialty Shapes",
+        "Pantry Storage",
+        "Twist Lid Storage",
+        "On-the-Go-Meal Storage"
+      ]
+    },
+    {
+      "title": "LOCKNLOCK",
+      "listitem": [
+        "BPA Free Borosilicate Glass",
+        "BPA Free Plastic",
+        "BPA Free Tritan"
+      ]
+    },
+    {
+      "header": "RACHAEL RAY",
+      "title": "RACH'S SIGNATURE SELECTIONS",
+      "listitem": [
+        "Garbage Bowls",
+        "EVOO Bottles",
+        "Signature Tools",
+        "Ceramic Bakers",
+        "Cook + Create Cookware",
+        "NITRO Cast Iron"
+      ]
+    },
+    {
+      "header": "RACHAEL RAY",
+      "title": "SHOP BY COLOR",
+      "listitem": [
+        "Oranges",
+        "Reds",
+        "Purples",
+        "Grays",
+        "Blues",
+        "Greens",
+        "Teals"
+      ]
+    },
+    {
+      "header": "RACHAEL RAY",
+      "title": "COOKWARE",
+      "listitem": [
+        "Cookware Sets",
+        "Skillets & Frying Pans",
+        "Cast Iron",
+        "Stir Frys & Woks",
+        "Stockpots & Dutch Ovens",
+        "Saucepans & Steamer Sets"
+      ]
+    },
+    {
+      "header": "RACHAEL RAY",
+      "title": "TOOLS, PANTRY, & TABLE",
+      "listitem": ["Tools", "Mixing Bowls", "Serveware", "Pantry"]
+    },
+    {
+      "header": "RACHAEL RAY",
+      "title": "BAKEWARE",
+      "listitem": [
+        "Bakeware Sets",
+        "Cooking & Baking Sheets",
+        "All Bakeware & Ovenware",
+        "Roasters"
+      ]
+    },
+    {
+      "header": "RUFFONI",
+      "title": "COOKWARE",
+      "listitem": [
+        "Cookware Sets",
+        "Casseroles",
+        "Stockpots",
+        "Saucepans",
+        "Sautés and Frying Pans",
+        "Braisers"
+      ]
+    },
+
+    {
+      "header": "RUFFONI",
+      "title": "MATERIAL",
+      "listitem": [
+        "Hammered Stainless Steel",
+        "Tri-Ply",
+        "Tri-Ply Copper Stainless Steel"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  font-family: "Cicre", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+@font-face {
+  font-family: "Cicre";
+  src: url("../public/Circe/Circe-Bold.otf") format("woff"),
+    url("../public/Circe/Circe-ExtraBold.otf") format("woff2"),
+    url("../public/Circe/CRC25.otf") format("woff2"),
+    url("../public/Circe/CRC35.otf") format("woff2"),
+    url("../public/Circe/CRC55.otf") format("woff2");
+  /* Các định dạng file font khác có thể được thêm vào đây */
+}

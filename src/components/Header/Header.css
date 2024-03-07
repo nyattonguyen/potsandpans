@@ -1,0 +1,48 @@
+.header-container {
+    position: fixed !important;
+    top: 50px;
+    left: 0;
+    right: 0;
+    z-index: 1010;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 60px 25px;
+    margin: 0 auto;
+    transition: all 0.5s ease;
+    border-bottom: 1px solid #a09a9a;
+  }
+  
+  .header-container .logo img {
+    width: 250px;
+    transition: width 0.3s ease; /* Đảm bảo chuyển đổi mượt mà */
+  }
+  
+  /* Điều chỉnh lại để logo và header thực sự nhỏ hơn khi cuộn */
+  .header-scrolled .logo img {
+    width: 125px; /* Giảm kích thước logo xuống 50% */
+  }
+  
+  .header-scrolled {
+    padding: 11px 30px 12.5px; /* Giảm padding xuống 50% */
+    top: 50px; /* Điều chỉnh vị trí top để header gần gũi hơn với đỉnh trang */
+  }
+  
+  @media (max-width: 768px) {
+    .header-container .logo img {
+      width: 150px;
+    }
+  
+    .header-container {
+      padding: 15px;
+    }
+  
+    /* Loại bỏ các quy tắc thay đổi kích thước logo khi cuộn cho mobile */
+    .header-scrolled .logo img {
+        width: 150px; /* Giữ nguyên kích thước logo khi cuộn trên mobile */
+    }
+  
+    .header-scrolled {
+      padding: 7.5px; /* Giảm padding xuống 50% cho màn hình nhỏ */
+    }
+  }
