@@ -1,0 +1,82 @@
+/* .p-080 {
+  padding: 0 80px;
+} */
+.p-20 {
+  padding: 20px;
+}
+.title-recipe {
+  font-family: "Vollkorn", serif;
+  font-weight: 500;
+}
+
+#card-bodyrecipe {
+  display: flex;
+  flex-direction: column;
+  text-align: start !important;
+  background-color: #7a99a3 !important;
+  color: aliceblue !important;
+}
+
+.box-filter {
+  border: none;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  width: 90%;
+  height: 72px;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-filter,
+.item-filter-main {
+  font-size: 26px;
+  color: black;
+  margin: 0 22px;
+  cursor: pointer;
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  font-size: 23px;
+}
+
+.item-filter::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.line-custom {
+  height: 1px;
+  width: auto;
+  margin: 0 12px;
+  padding-left: 3px;
+  padding-right: 3px;
+  background-color: #1d4242;
+}
+
+.item-filter:hover + .line-custom {
+  animation: fadeOutLeft 0.5s forwards;
+}
+.item-filter:hover {
+  color: #7a99a3;
+}
+
+#item-pagination {
+  background: transparent;
+  color: black;
+  border: none;
+  font-size: 22px;
+}
+
+#item-pagination#active {
+  background: transparent;
+  color: #7a99a3;
+  border: none;
+  font-size: 22px;
+}

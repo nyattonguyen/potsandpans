@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Col, Offcanvas, Row } from "react-bootstrap";
 import "./CartRight.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,30 +6,59 @@ import {
   removeItemFromCart,
   updateItemCart,
 } from "../../Redux/Slices/CartItem";
+import { Link, NavLink } from "react-router-dom";
 
-// import ItemCart from './ItemCart'
 function CartRight({ open, close }) {
   const [listItem, setListItem] = useState([]);
-
+  // useSelector((state) => state.itemCart);
   const itemCart = useSelector((state) => state.itemCart);
+  console.log("eror", itemCart);
   const dispatch = useDispatch();
-  console.log(itemCart);
-  useEffect(() => {
-    setListItem(itemCart);
-  }, [open]);
+
+  const imageNames = [
+    "america.jpg",
+    "dinersclub.jpg",
+    "discover.jpg",
+    "gpay.jpg",
+    "Master.jpg",
+    "stripe.jpg",
+    "venmo.jpg",
+    "visa.jpg",
+  ];
+
+  const images = imageNames.map((name) => ({
+    name,
+    url: `${process.env.PUBLIC_URL}/image/${name}`,
+  }));
+
+  const calculateTotalPrice = (itemCart) => {
+    return itemCart.reduce((acc, product) => {
+      const price = parseFloat(product.price);
+      const quantity = product.quantity;
+      const productTotal = price * quantity;
+      return acc + productTotal;
+    }, 0);
+  };
+
+  const totalPrice = useMemo(() => {
+    if (itemCart.length > 0) {
+      return calculateTotalPrice(itemCart);
+    }
+    return 0; // Trả về 0 nếu không có sản phẩm trong giỏ hàng
+  }, [itemCart]);
 
   const handleQuantityChange = (id, changeValue) => {
     const newQuantity = Math.max(
       0,
       itemCart.find((item) => item.id === id).quantity + changeValue
-    ); // Ensure valid quantity
-    dispatch(updateItemCart({ id, quantity: newQuantity })); // Dispatch action to update quantity
+    );
+    dispatch(updateItemCart({ id, quantity: newQuantity }));
   };
 
   const handleRemoveItem = (itemId) => {
-    const newStore = listItem.filter((item) => item.id !== itemId); // Efficient filtering
+    const newStore = itemCart.filter((item) => item.id !== itemId);
     setListItem(newStore);
-    dispatch(removeItemFromCart({ id: itemId })); // Update localStorage
+    dispatch(removeItemFromCart({ id: itemId }));
   };
 
   const handleAdd = (id) => {
@@ -40,18 +69,26 @@ function CartRight({ open, close }) {
     handleQuantityChange(id, -1);
   };
 
-  console.log(listItem);
+  useEffect(() => {
+    setListItem(itemCart);
+  }, [open]);
+
   return (
     <Offcanvas show={open} onHide={close} placement="end">
-      <div className="cart-container">
-        <div className="header-cart">
+      <div className="cart-container " style={{ height: "100%" }}>
+        <div className="header-cart ">
           <Offcanvas.Header closeButton>
             <Offcanvas.Title style={{ textAlign: "center" }}>
-              <h2 style={{ fontWeight: 400 }}>Cart</h2>
+              <h2
+                className="title-custom"
+                style={{ fontWeight: 400, marginTop: 4 }}
+              >
+                Cart
+              </h2>
             </Offcanvas.Title>
           </Offcanvas.Header>
         </div>
-        <Offcanvas.Body>
+        <Offcanvas.Body style={{ height: "60%" }}>
           {/* check item cart empty  */}
           {itemCart.length > 0 ? (
             itemCart.map((item, index) => (
@@ -133,6 +170,72 @@ function CartRight({ open, close }) {
             </div>
           )}
         </Offcanvas.Body>
+        {itemCart.length > 0 && (
+          <div
+            className=""
+            style={{
+              position: "relative",
+              display: "block",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div className="d-flex justify-content-center footer-card-right">
+              <div className="d-flex justify-content-center footer-card-right">
+                <Link to="/account/confirm">
+                  <button
+                    className="button-custom fz-18"
+                    type="button"
+                    style={{ width: "100%", marginTop: 34, height: 44 }}
+                  >
+                    Checkout 。${totalPrice}
+                  </button>
+                </Link>
+              </div>
+            </div>
+            <div className="d-block " style={{ marginTop: 30 }}>
+              <ul
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  listStyleType: "none",
+                  paddingLeft: 0,
+                }}
+              >
+                {images.map((item) => (
+                  <li style={{ justifyContent: "center" }}>
+                    <img
+                      alt={item.name}
+                      src={item.url}
+                      width={36}
+                      height={22}
+                      style={{ borderRadius: 4, padding: 2 }}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div style={{ marginTop: 30 }}>
+              <div
+                className="d-flex"
+                style={{ justifyContent: "center", alignItems: "center" }}
+              >
+                <span>Monthly payments available with </span>
+                <img
+                  src="https://cdn-assets.affirm.com/images/all_black_logo-white_bg.jpg"
+                  alt="arfim"
+                  style={{
+                    height: "15px",
+                    lineHeight: 1,
+                    marginLeft: 4,
+                    marginBottom: 5,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </Offcanvas>
   );

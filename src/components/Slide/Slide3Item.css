@@ -1,0 +1,27 @@
+.item-slide-category {
+  height: "435px";
+  width: "400px";
+  margin-bottom: "10px";
+}
+
+@media (min-width: 768px) and(max-width: 1023px) {
+  .category-slide {
+    margin-top: -2% !important;
+  }
+  .item-slide-category {
+    height: 300px !important;
+    width: 310px !important;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-slide {
+    margin-top: 48%;
+  }
+  .item-slide-category {
+    height: 300px !important;
+    width: 310px !important;
+    margin-bottom: 30px;
+  }
+}

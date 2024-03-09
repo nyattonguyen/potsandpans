@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Alert, Button, Form, NavLink } from "react-bootstrap";
+import { Alert, Button, Form } from "react-bootstrap";
 import "./SignIn.css";
+import { Link } from "react-router-dom";
 
 function SignIn() {
   const [inputUsername, setInputUsername] = useState("");
@@ -70,10 +71,10 @@ function SignIn() {
         >
           <p>Don't have an account? </p>
 
-          <NavLink href="/signup" className="link-up" style={{ marginLeft: 4 }}>
+          <Link to="/signup" className="link-up" style={{ marginLeft: 4 }}>
             {" "}
             Create one
-          </NavLink>
+          </Link>
         </div>
       </Form>
       {/* Footer */}

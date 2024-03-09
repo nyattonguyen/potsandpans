@@ -3,9 +3,9 @@ import { Accordion, Col, Row } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import { IoIosStar } from "react-icons/io";
 import { IoIosStarHalf } from "react-icons/io";
-import { NavLink, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./Detail.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../Redux/Slices/CartItem";
 import data from "../../Mock/exportproduct.json";
 function Detail() {
@@ -16,6 +16,8 @@ function Detail() {
   const [product, setProduct] = useState({
     quantity: 1,
   });
+  const itemCart = useSelector((state) => state.itemCart);
+  console.log("day ne", itemCart);
   const [listItemSame, setListItemSame] = useState([]);
   useEffect(() => {
     const productsArray = Array.from(data.products);
@@ -31,10 +33,12 @@ function Detail() {
     setListItemSame(first12Items);
   }, [id]);
 
-  console.log("day ", listItemSame);
   const handleAddToCart = () => {
+    console.log(product);
     dispatch(addItemToCart(product));
   };
+
+  const { isMobile, isTablet } = useSelector((state) => state.widthDevice);
   return (
     <div style={{ padding: "60px" }}>
       <center>
@@ -44,6 +48,7 @@ function Detail() {
             style={{
               display: "flex",
               flex: 1,
+              justifyContent: isTablet ? "center" : "",
             }}
           >
             <Carousel
@@ -98,7 +103,7 @@ function Detail() {
             >
               <div className="productMeta">
                 <div className="ProductMeta__Vendor">
-                  <NavLink
+                  <Link
                     style={{
                       color: "#1d423c",
                       fontSize: "18px",
@@ -108,7 +113,7 @@ function Detail() {
                     }}
                   >
                     {product.productType}
-                  </NavLink>
+                  </Link>
                   <h1
                     style={{
                       fontFamily: "Freight, serif",
@@ -293,9 +298,11 @@ function Detail() {
                     </li>
                   </ul>
                 </div>
-                <Accordion defaultActiveKey="0">
+                <Accordion id="toggle-bottom" defaultActiveKey="0">
                   <Accordion.Item eventKey="0">
-                    <Accordion.Header>Description</Accordion.Header>
+                    <Accordion.Header id="header-detail-prod">
+                      Description
+                    </Accordion.Header>
                     <Accordion.Body>
                       Get pantry perfect and organize your dried goods, food
                       items, baking ingredients, snacks, leftovers and more with
@@ -314,11 +321,13 @@ function Detail() {
                       microwave safe for convenient reheating and dishwasher
                       safe for easy cleanup (lids not intended for microwave
                       use).
-                      <h4>Sku: {product.sku}</h4>
+                      <h4 className="mt-3">Sku: {product.sku}</h4>
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey="1">
-                    <Accordion.Header>Materials</Accordion.Header>
+                    <Accordion.Header id="header-detail-prod">
+                      Materials
+                    </Accordion.Header>
                     <Accordion.Body>
                       <div className="d-flex">
                         <span style={{ fontWeight: 500 }}>Lid Material:</span>{" "}
@@ -327,20 +336,22 @@ function Detail() {
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey="2">
-                    <Accordion.Header>Use and care</Accordion.Header>
+                    <Accordion.Header id="header-detail-prod">
+                      Use and care
+                    </Accordion.Header>
                     <Accordion.Body>
                       <div className="d-flex">
-                        <span style={{ fontWeight: 500 }}>
+                        <span style={{ fontWeight: 400 }}>
                           Dishwasher Safe:
                         </span>{" "}
                         <span> Yes</span>
                       </div>
-                      <div className="d-flex">
-                        <span style={{ fontWeight: 500 }}>Microwave Safe:</span>{" "}
+                      <div className="d-flex mt-4">
+                        <span style={{ fontWeight: 400 }}>Microwave Safe:</span>{" "}
                         <span> True</span>
                       </div>
-                      <div className="d-flex">
-                        <span style={{ fontWeight: 500 }}>
+                      <div className="d-flex mt-4">
+                        <span style={{ fontWeight: 400 }}>
                           Oven-safe Temperature:
                         </span>{" "}
                         <span> No</span>
@@ -348,7 +359,9 @@ function Detail() {
                     </Accordion.Body>
                   </Accordion.Item>
                   <Accordion.Item eventKey="3">
-                    <Accordion.Header>Warranty</Accordion.Header>
+                    <Accordion.Header id="header-detail-prod">
+                      Warranty
+                    </Accordion.Header>
                     <Accordion.Body>
                       <span>Limited Lifetime Guarantee</span>
                     </Accordion.Body>

@@ -4,7 +4,6 @@
 }
 
 .cart-container {
-  width: 500px;
 }
 
 .group-btn-exe {
@@ -56,4 +55,9 @@
 }
 .button-custom:hover:before {
   width: 100%;
+}
+
+.footer-card-right {
+  border: none;
+  border-top: 1px solid #929090;
 }

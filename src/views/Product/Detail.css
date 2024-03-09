@@ -47,3 +47,13 @@
 .carousel-indicators {
   display: none !important;
 }
+
+#header-detail-prod {
+  font-size: 20px;
+  font-weight: 400;
+  font-family: "Vollkorn", serif;
+  background: transparent;
+}
+#toggle-bottom {
+  font-family: "Vollkorn", serif;
+}

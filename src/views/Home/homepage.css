@@ -66,6 +66,16 @@
 }
 
 /* Responsive design cho product-info trên thiết bị có chiều rộng nhỏ hơn 768px */
+@media (min-width: 768px) and(max-width: 1023px) {
+  .category-slide {
+    margin-top: -2% !important;
+  }
+  .item-slide-category {
+    height: 300px !important;
+    width: 310px !important;
+    margin-bottom: 30px;
+  }
+}
 @media (max-width: 768px) {
   .product-info {
     flex-direction: column; /* Chuyển từ hàng ngang sang hàng dọc */
@@ -76,12 +86,26 @@
   .product-info img {
     max-width: 80%; /* Tăng kích thước tối đa của hình ảnh để phù hợp với màn hình nhỏ */
     margin-bottom: 20px; /* Thêm khoảng cách giữa hình ảnh và mô tả */
+    margin-top: 20px;
   }
 
   .product-info > div {
     width: 100%; /* Cho phần mô tả chiếm toàn bộ chiều rộng */
     max-width: 100%; /* Đảm bảo không vượt quá chiều rộng của container */
   }
+  .category-slide {
+    margin-top: 48% !important;
+  }
+  .item-slide-category {
+    height: 300px !important;
+    width: 310px !important;
+    margin-bottom: 30px;
+  }
+}
+.item-slide-category {
+  height: "435px";
+  width: "400px";
+  margin-bottom: "10px";
 }
 
 .button-custom {
@@ -124,4 +148,34 @@
 }
 .button-custom:hover:before {
   width: 100%;
+}
+
+.category-slide {
+  margin-top: -18%;
+}
+
+.r-custom {
+  left: 74%;
+}
+.w-650 {
+  width: 600px;
+}
+
+.w-360 {
+  width: 360px;
+}
+
+@media (max-width: 768px) {
+  .w-650 {
+    width: 360px;
+  }
+}
+
+.title-custom {
+  font-weight: 500;
+  font-family: "Vollkorn", sans-serif;
+}
+.content-custom {
+  font-weight: 300;
+  font-family: "Vollkorn", sans-serif;
 }

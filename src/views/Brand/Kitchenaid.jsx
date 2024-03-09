@@ -1,10 +1,12 @@
-import React from "react";
-import { Button, Carousel, Col, NavLink, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Carousel, Col, Row } from "react-bootstrap";
 import data from "../../Mock/exportproduct.json";
+import { Link } from "react-router-dom";
 
 function Kitchenaid() {
   const selectedProducts = {};
   const result = [];
+  const [showVideo, setShowVideo] = useState(false);
 
   data.products.forEach((item) => {
     if (!selectedProducts[item.productType] && result.length < 12) {
@@ -12,8 +14,9 @@ function Kitchenaid() {
       result.push(item);
     }
   });
-  const thumbUrl =
-    "https://i.vimeocdn.com/video/1248236584-41a6a8954d55ea181a0deda53cd6d34b9b4bd5300ab737f5b49ccedffae43bfc-d?mw=1400&mh=787&q=70";
+  const videoId = "t0jMviBJ-XI"; // Thay thế bằng ID video YouTube của bạn
+  const thumbnailUrl = `https://img.youtube.com/vi/t0jMviBJ-XI/0.jpg`; // URL thumbnail của video
+  const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`; // URL video với autoplay
   return (
     <div
       className="container"
@@ -102,12 +105,25 @@ function Kitchenaid() {
           alignItems: "center",
         }}
       >
-        <video style={{ width: "80%", height: "60%" }} controls>
-          <source
-            src="https://player.vimeo.com/external/1248236584.hd.mp4?s=54511cd33c2fcf3b3174bf19f1f4ce0cf69fd5a1&profile_id=175"
-            type="video/mp4"
+        {!showVideo ? (
+          <img
+            src={thumbnailUrl}
+            width="80%"
+            alt="Video Thumbnail"
+            style={{ cursor: "pointer" }}
+            onClick={() => setShowVideo(true)}
           />
-        </video>
+        ) : (
+          <iframe
+            width="100%"
+            height="515"
+            src={videoUrl}
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        )}
       </div>
       <div style={{ marginTop: 40 }}>
         <Carousel>
@@ -459,7 +475,7 @@ function Kitchenaid() {
             marginTop: 10,
           }}
         >
-          <NavLink href="/kitchenaid">SHOP ALL KITCHENAID</NavLink>
+          <Link to="/kitchenaid">SHOP ALL KITCHENAID</Link>
         </Button>
       </center>
     </div>

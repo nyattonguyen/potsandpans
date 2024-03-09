@@ -1,48 +1,88 @@
 .header-container {
-    position: fixed !important;
-    top: 50px;
-    left: 0;
-    right: 0;
-    z-index: 1010;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 22px 60px 25px;
-    margin: 0 auto;
-    transition: all 0.5s ease;
-    border-bottom: 1px solid #a09a9a;
+  position: fixed !important;
+  top: 50px;
+  left: 0;
+  right: 0;
+  z-index: 1010;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 60px 25px;
+  margin: 0 auto;
+  transition: all 0.5s ease;
+  border-bottom: 1px solid #a09a9a;
+}
+
+.header-container .logo img {
+  width: 250px;
+  transition: width 0.3s ease; /* Đảm bảo chuyển đổi mượt mà */
+}
+
+/* Điều chỉnh lại để logo và header thực sự nhỏ hơn khi cuộn */
+.header-scrolled .logo img {
+  width: 125px; /* Giảm kích thước logo xuống 50% */
+}
+
+.header-scrolled {
+  padding: 11px 30px 12.5px; /* Giảm padding xuống 50% */
+  top: 50px; /* Điều chỉnh vị trí top để header gần gũi hơn với đỉnh trang */
+  height: 100px;
+}
+@media (min-width: 768px) and(max-width: 1023) {
+  .header-container .logo {
+    margin: auto !important;
   }
-  
+}
+@media (max-width: 768px) {
   .header-container .logo img {
-    width: 250px;
-    transition: width 0.3s ease; /* Đảm bảo chuyển đổi mượt mà */
+    width: 150px;
   }
-  
-  /* Điều chỉnh lại để logo và header thực sự nhỏ hơn khi cuộn */
+
+  .header-container {
+    padding: 15px;
+  }
+
+  /* Loại bỏ các quy tắc thay đổi kích thước logo khi cuộn cho mobile */
   .header-scrolled .logo img {
-    width: 125px; /* Giảm kích thước logo xuống 50% */
+    width: 150px; /* Giữ nguyên kích thước logo khi cuộn trên mobile */
   }
-  
+
   .header-scrolled {
-    padding: 11px 30px 12.5px; /* Giảm padding xuống 50% */
-    top: 50px; /* Điều chỉnh vị trí top để header gần gũi hơn với đỉnh trang */
+    padding: 7.5px; /* Giảm padding xuống 50% cho màn hình nhỏ */
   }
-  
-  @media (max-width: 768px) {
-    .header-container .logo img {
-      width: 150px;
-    }
-  
-    .header-container {
-      padding: 15px;
-    }
-  
-    /* Loại bỏ các quy tắc thay đổi kích thước logo khi cuộn cho mobile */
-    .header-scrolled .logo img {
-        width: 150px; /* Giữ nguyên kích thước logo khi cuộn trên mobile */
-    }
-  
-    .header-scrolled {
-      padding: 7.5px; /* Giảm padding xuống 50% cho màn hình nhỏ */
-    }
-  }
+}
+.input-search-custom {
+  border: none;
+  border-bottom: 1px solid;
+  background: transparent;
+  border-radius: 0px;
+}
+.input-search-custom:focus,
+.input-search-custom:active {
+  border: none;
+  border-bottom: 1px solid;
+  background: transparent;
+  border-radius: 0px;
+  outline: none;
+}
+#list-item-menu-header-main {
+  font-family: sans-serif;
+}
+
+#header-l {
+  justify-content: initial;
+}
+
+#item-menu-header-main {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  font-family: "Quicksand", serif;
+  margin-top: 6px;
+}
+.id-itemsub-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  font-family: "Quicksand", serif;
+}

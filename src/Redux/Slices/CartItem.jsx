@@ -5,6 +5,7 @@ const cartItemProductSlice = createSlice({
   initialState: [],
   reducers: {
     addItemToCart: (state, action) => {
+      console.log("redux", { action });
       const existingItem = state.find((item) => item.id === action.payload.id);
       if (existingItem) {
         existingItem.quantity += 1;
@@ -13,7 +14,8 @@ const cartItemProductSlice = createSlice({
       }
     },
     removeItemFromCart: (state, action) => {
-      return state.filter((item) => item.id !== action.payload.id); // Filter out removed item
+      const newState = state.filter((item) => item.id !== action.payload.id);
+      return newState;
     },
     updateItemCart(state, action) {
       const { id, quantity } = action.payload;

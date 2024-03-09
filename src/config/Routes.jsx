@@ -11,6 +11,9 @@ import Detail from "../views/Product/Detail";
 import CollectionFill from "../views/Collection/CollectionFill";
 import SignIn from "../components/SignUp-SignIn/SignIn";
 import SignUp from "../components/SignUp-SignIn/SignUp";
+import Recipes from "../components/Recipes/Recipes";
+import Checkout from "../components/PayMent/Checkout";
+import Comfirm from "../views/Cart/Comfirm";
 
 export const routes = createBrowserRouter([
   {
@@ -56,6 +59,18 @@ export const routes = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/recipes",
+    element: <Recipes />,
+  },
+  {
+    path: "/account/paypal",
+    element: <Checkout />,
+  },
+  {
+    path: "/account/confirm",
+    element: <Comfirm />,
   },
   {
     path: "*",

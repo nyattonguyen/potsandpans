@@ -1,5 +1,40 @@
 .logo {
-    width: 250px;
-    transition: width 0.3s ease; /* Đảm bảo chuyển đổi mượt mà */
-  }
-  
+  width: 250px;
+  transition: width 0.3s ease; /* Đảm bảo chuyển đổi mượt mà */
+}
+
+.title-footer {
+  font-weight: 500;
+  font-family: "Vollkorn", serif;
+}
+.item-footer-main {
+  font-weight: 500;
+  font-family: "Quicksand", serif;
+}
+.item-footer-main a {
+  text-decoration: none !important;
+}
+.fz-12 {
+  font-weight: 500;
+  font-size: 12px;
+  font-family: "Quicksand", serif;
+}
+.fz-8 {
+  font-weight: 500;
+  font-size: 8px !important;
+  font-family: "Quicksand", serif;
+}
+.button-custom-footer {
+  width: 62px;
+  height: 35px;
+  margin-top: 0;
+  border: none;
+  border-radius: 0 !important;
+  color: white !important;
+}
+.input-foter-main {
+  height: 38px;
+  width: 42%;
+  outline: none;
+  border: none;
+}

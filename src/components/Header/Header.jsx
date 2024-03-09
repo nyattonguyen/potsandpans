@@ -8,35 +8,42 @@ import {
   NavDropdown,
   Offcanvas,
 } from "react-bootstrap";
+import { FaBars } from "react-icons/fa6";
 import { NavDropdownMenu } from "react-bootstrap-submenu";
 import "react-bootstrap-submenu/dist/index.css";
 import MenuHeader from "./MenuHeader";
 import { CiShoppingBasket } from "react-icons/ci";
 import CartRight from "../../views/Cart/CartRight";
+import { useDispatch, useSelector } from "react-redux";
+import { updateWidthDevice } from "../../Redux/Slices/CheckWidth";
+import HeaderTablet from "./HeaderTablet";
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [isTablet, setIsTablet] = useState(window.innerWidth < 1024);
+  const { isMobile, isTablet } = useSelector((state) => state.widthDevice);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const [show, setShow] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const handleCloseMenu = () => setShowMenu(false);
+  const handleShowMenu = () => setShowMenu(true);
+
+  const dispatch = useDispatch();
   useEffect(() => {
-    const handleResizeTablet = () => {
-      setIsTablet(window.innerWidth < 1024);
-    };
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      const isMobile = window.innerWidth < 768;
+      const isTablet = window.innerWidth < 1024 && !isMobile;
+      dispatch(updateWidthDevice({ isMobile, isTablet }));
     };
 
     window.addEventListener("resize", handleResize);
-    window.addEventListener("resize", handleResizeTablet);
+    handleResize(); // Trigger initially
+
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("resize", handleResizeTablet);
     };
   }, []);
 
@@ -56,7 +63,9 @@ function Header() {
     };
   }, []);
 
-  const headerClass = isScrolled
+  const headerClass = isTablet
+    ? "header-container"
+    : isScrolled
     ? "header-container header-scrolled"
     : "header-container";
 
@@ -68,27 +77,42 @@ function Header() {
     <Navbar
       bg="light"
       expand="lg"
-      style={{ display: "block" }}
+      style={{ display: "block", maxHeight: "136px" }}
       variant="white"
       className={headerClass}
       onToggle={toggleNav}
       expanded={isNavExpanded}
     >
-      <Container className="flex">
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Brand href="/">
-          <div className="logo">
+      <Container className="flex" id={isMobile ? "header-l" : ""}>
+        {isTablet ||
+          (isMobile && <FaBars size={30} onClick={handleShowMenu} />)}
+        <Navbar.Brand
+          href="/"
+          style={{
+            margin: isTablet ? "auto" : "",
+            justifyContent: isMobile ? "center" : "",
+          }}
+        >
+          <div
+            className="logo"
+            style={{
+              display: isMobile ? "flex" : "",
+              justifyContent: isMobile ? "center" : "",
+            }}
+          >
             <img
               src="https://www.potsandpans.com/cdn/shop/files/Pots_and_Pans_Logo_Black-01_350x.png?v=1614351360"
               alt="Pots & Pans Logo"
-              className={`logo-img ${isScrolled ? "logo-scrolled" : ""}`}
+              className={`logo-img ${
+                isTablet ? "" : isScrolled ? "logo-scrolled" : ""
+              }`}
             />
           </div>
         </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto"></Nav>
           <Nav>
-            {!isMobile && (
+            {!isTablet && (
               <div className="d-flex ">
                 <Nav.Link style={{ fontSize: 15 }} href="/signin">
                   LogIn/SignUp
@@ -118,39 +142,17 @@ function Header() {
                 <CartRight open={show} close={handleClose} />
               </div>
             )}
-            {isMobile && (
-              <>
-                <Nav.Link
-                  href="#cart"
-                  className={
-                    !isNavExpanded
-                      ? "mobile-cart-icon"
-                      : "mobile-cart-icon hidden"
-                  }
-                ></Nav.Link>
-                <NavDropdownMenu
-                  title="Menu"
-                  id="collasible-nav-dropdown"
-                  alignRight
-                >
-                  <NavDropdown.Item href="#login">
-                    LogIn/SignUp
-                  </NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                </NavDropdownMenu>
-              </>
-            )}
           </Nav>
         </Navbar.Collapse>
-        {isMobile && !isNavExpanded && (
-          <Nav.Link href="#cart" className="mobile-cart-icon">
-            <FaShoppingCart />
-          </Nav.Link>
-        )}
+
         <CartRight />
       </Container>
-
-      {!isMobile && <MenuHeader isTablet={isTablet} isMobile={isMobile} />}
+      {isTablet && (
+        <HeaderTablet show={showMenu} handleClose={handleCloseMenu} />
+      )}
+      {!isMobile && !isTablet && (
+        <MenuHeader isTablet={isTablet} isMobile={isMobile} />
+      )}
     </Navbar>
   );
 }

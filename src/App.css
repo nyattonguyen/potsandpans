@@ -40,3 +40,13 @@
     transform: rotate(360deg);
   }
 }
+
+.container-custom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img-confitrm {
+  border: 1px solid #949494;
+  border-radius: 2pxs;
+}

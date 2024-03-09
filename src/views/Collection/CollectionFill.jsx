@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import FormCheckInput from "react-bootstrap/esm/FormCheckInput";
 import "./CollectionFill.css";
-import productsData from "../../Mock/exportproduct.json";
-import { NavLink, Pagination } from "react-bootstrap";
+import { Pagination } from "react-bootstrap";
 import productList from "../../Mock/exportproduct.json";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function CollectionFill() {
   const { id, keyfill } = useParams();
@@ -15,7 +13,12 @@ export default function CollectionFill() {
   const [openBrand, setOpenBrand] = useState(true);
   const [openMaterial, setOpenMaterial] = useState(true);
   const [productsOnSale, setProductsOnSale] = useState([]);
+  const [titlePage, setTitlePage] = useState("");
   const productsPerPage = 16;
+  function capitalizeFirstLetter(str) {
+    let title = str.charAt(0).toUpperCase() + str.slice(1);
+    setTitlePage(title);
+  }
 
   const categories = [
     { name: "Accessories", count: 5 },
@@ -65,19 +68,34 @@ export default function CollectionFill() {
   ];
 
   useEffect(() => {
-    // Lọc sản phẩm giảm giá
-    const productsArray = Array.from(productList.products);
-
-    const filteredProducts = productsArray.filter((element) =>
-      element.categories.includes(id)
+    capitalizeFirstLetter(id.toLowerCase());
+    var lowercaseId = id.toLowerCase();
+    var productsArray = Array.from(productList.products);
+    var filteredProducts = productsArray.filter((element) =>
+      element.categories.some((category) =>
+        category.toLowerCase().includes(lowercaseId)
+      )
     );
-    setListProductBrand(filteredProducts);
 
-    // const onSaleProducts = filteredProducts.filter(
-    //     (product) => parseFloat(product.comparePrice) > parseFloat(product.price)
-    // );
+    setListProductBrand(filteredProducts);
     setProductsOnSale(filteredProducts);
-  }, []);
+  }, [id]);
+  const brandArray = [];
+
+  // filter by brand
+  const handleBrandChange = (brand, checked) => {
+    if (checked) {
+      console.log(brand.name);
+      brandArray.push(brand.name);
+    } else {
+      const index = brandArray.indexOf(brand.name);
+      if (index > -1) {
+        brandArray.splice(index, 1);
+      }
+    }
+  };
+
+  // console.log("day ne da ", brandArray);
 
   // Tính toán tổng số trang
   const pageCount = Math.ceil(productsOnSale.length / productsPerPage);
@@ -110,11 +128,10 @@ export default function CollectionFill() {
   const handleToDetail = (item) => {
     console.log("da ", item);
   };
-
   return (
     <main>
       <div className="bg-white d-flex justify-content-center pb-4">
-        <header className="fw-medium fs-3">Clearance</header>
+        <header className="fw-medium fs-3">{titlePage}</header>
       </div>
       <div className="container-fluid">
         <div className="row">
@@ -178,6 +195,9 @@ export default function CollectionFill() {
                         className="form-check-input"
                         type="checkbox"
                         id={`brand-${index}`}
+                        onChange={(e) =>
+                          handleBrandChange(brand, e.target.checked)
+                        }
                       />
                       <label
                         className="form-check-label d-flex justify-content-between align-items-center w-100"
@@ -231,53 +251,60 @@ export default function CollectionFill() {
           {/* Products section */}
           <div className="col-md-8 col-lg-9">
             <div className="row">
-              {currentProducts.map((product, index) => (
-                <NavLink
-                  href={`/product/detail/${product.id}`}
-                  key={index}
-                  className="col-md-6 col-lg-3 mb-4"
-                >
-                  <div className="card h-100" style={{ border: "none" }}>
-                    <div className="card-header bg-transparent border-0">
-                      <span
-                        className="badge  text-white"
-                        style={{ backgroundColor: "#000" }}
-                      >
-                        On sale
-                      </span>
-                    </div>
-                    <img
-                      src={product.imageURL}
-                      className="card-img-top img-fluid"
-                      alt={product.name}
-                      style={{ maxHeight: "400px" }}
-                    />
-                    <div className="card-body">
-                      <h5 className="card-title">{product.name}</h5>
-                      <div className="card-footer bg-transparent border-0">
-                        <div className="d-flex product-price justify-content-center">
-                          <span
-                            className={
-                              product.comparePrice == "0.00"
-                                ? "price-col price-color fz" // Apply both classes if comparePrice exists
-                                : "price-col fz" // Apply only "price-col" if comparePrice doesn't exist
-                            }
-                          >
-                            ${product.price}
-                          </span>
-                          {product.comparePrice == "0.00" ? (
-                            " "
-                          ) : (
-                            <span className="text-muted price-col fz ml-4">
-                              <s>${product.comparePrice}</s>
+              {currentProducts.length > 0 ? (
+                currentProducts.map((product, index) => (
+                  <Link
+                    to={`/product/detail/${product.id}`}
+                    key={index}
+                    id="item-product"
+                    className="col-md-6 col-lg-3 mb-4"
+                  >
+                    <div className="card h-100" style={{ border: "none" }}>
+                      <div className="card-header bg-transparent border-0">
+                        <span
+                          className="badge  text-white"
+                          style={{ backgroundColor: "#000" }}
+                        >
+                          {titlePage === "New arrivals" ? "New" : "On sale"}
+                        </span>
+                      </div>
+                      <img
+                        src={product.imageURL}
+                        className="card-img-top img-fluid "
+                        alt={product.name}
+                        style={{ maxHeight: "400px", width: "80%" }}
+                      />
+                      <div className="card-body">
+                        <h5 className="card-title fz-18">{product.name}</h5>
+                        <div className="card-footer bg-transparent border-0">
+                          <div className="d-flex product-price justify-content-center">
+                            <span
+                              className={
+                                product.comparePrice == "0.00"
+                                  ? "price-col price-color fz fz-24" // Apply both classes if comparePrice exists
+                                  : "price-col fz fz-24" // Apply only "price-col" if comparePrice doesn't exist
+                              }
+                            >
+                              ${product.price}
                             </span>
-                          )}
+                            {product.comparePrice == "0.00" ? (
+                              " "
+                            ) : (
+                              <span className="text-muted price-col fz ml-4">
+                                <s>${product.comparePrice}</s>
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </NavLink>
-              ))}
+                  </Link>
+                ))
+              ) : (
+                <center>
+                  <h3>There are no products in this category</h3>
+                </center>
+              )}
             </div>
           </div>
 

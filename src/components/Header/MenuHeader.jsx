@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Col, ListGroup, Nav, NavLink, Row } from "react-bootstrap";
+import { Col, ListGroup, Nav, Row } from "react-bootstrap";
 import brands from "../../Mock/subcategory.json";
 import categories from "../../Mock/subcategory2.json";
+import { LiaSearchSolid } from "react-icons/lia";
 import { useDispatch } from "react-redux";
 import { updateItemSearch } from "../../Redux/Slices/ItemSearch";
+import { Link, NavLink } from "react-router-dom";
 
 function MenuHeader({ isTablet, isMobile }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -27,6 +29,8 @@ function MenuHeader({ isTablet, isMobile }) {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+    setIsHoveredCategory(false);
+    setIsHoveredBrand(false);
   };
 
   const handleHoverBrand = () => {
@@ -120,194 +124,216 @@ function MenuHeader({ isTablet, isMobile }) {
   }, [itemContent]);
 
   return (
-    <div>
+    <div className="w-full">
       <div
         style={{
           height: 1,
           background: "gray",
         }}
       ></div>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <div style={{}}>
-          <Nav
-            variant="pills"
-            activeKey="1"
-            style={{
-              marginLeft: "90px",
-              display: "flex",
-            }}
-          >
-            <Nav.Item>
-              <Nav.Link
-                href="/shop-by-brand"
-                id="item-menu"
-                style={{ fontSize: 20, marginLeft: 10 }}
-                eventKey="2"
-                title="Item"
-                onMouseEnter={handleHoverBrand}
-              >
-                BRANDS
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                href="/shop-by-category"
-                style={{ fontSize: 20, marginLeft: 10 }}
-                id="item-menu"
-                eventKey="2"
-                title="Item"
-                onMouseEnter={handleHoverCategory}
-              >
-                CATEGORIES
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                style={{ fontSize: 20, marginLeft: 10 }}
-                id="item-menu"
-                eventKey="2"
-                title="Item"
-              >
-                RECIPES
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                style={{ fontSize: 20, marginLeft: 10 }}
-                id="item-menu"
-                eventKey="2"
-                title="Item"
-              >
-                NEW
-              </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link
-                style={{ fontSize: 20, marginLeft: 10 }}
-                id="item-menu"
-                eventKey="2"
-                title="Item"
-              >
-                CLEARANCE
-              </Nav.Link>
-            </Nav.Item>
+
+      <div style={{}}>
+        <Nav
+          id="list-item-menu-header-main"
+          variant="pills"
+          activeKey="1"
+          style={{
+            marginLeft: "90px",
+            display: "flex",
+          }}
+        >
+          <Nav.Item>
+            <NavLink
+              to="/shop-by-brand"
+              id="item-menu-header-main"
+              style={{ fontSize: 18, marginLeft: 10 }}
+              eventKey="2"
+              title="Item"
+              onMouseEnter={handleHoverBrand}
+            >
+              BRANDS
+            </NavLink>
+          </Nav.Item>
+          <Nav>
+            <NavLink
+              to="/shop-by-category"
+              style={{ fontSize: 18, marginLeft: 10 }}
+              id="item-menu-header-main"
+              eventKey="2"
+              title="Item"
+              onMouseEnter={handleHoverCategory}
+            >
+              CATEGORIES
+            </NavLink>
           </Nav>
-          <div style={{ display: isTablet ? "none" : "flex" }}>
-            {isHovered && (
-              <>
-                <div style={{ width: "24%" }}>
-                  <ListGroup>
-                    {isHoveredBrand &&
-                      listBrand.map((item, index) => (
-                        <ListGroup.Item
-                          style={{
-                            fontWeight: "500",
-                            fontSize: 18,
-                          }}
-                          action
-                          ref={(el) => (itemRefs.current[index] = el)}
-                          variant="light"
-                          onMouseEnter={() => handleMouseEnterItem(index)}
+          <Nav>
+            <NavLink
+              to="/recipes"
+              style={{ fontSize: 18, marginLeft: 10 }}
+              id="item-menu-header-main"
+              eventKey="2"
+              title="Item"
+              onMouseLeave={handleMouseLeave}
+            >
+              RECIPES
+            </NavLink>
+          </Nav>
+          <Nav>
+            <NavLink
+              to="/collections/category/New Arrivals"
+              style={{ fontSize: 18, marginLeft: 10 }}
+              id="item-menu-header-main"
+              eventKey="2"
+              title="Item"
+              onMouseLeave={handleMouseLeave}
+            >
+              NEW
+            </NavLink>
+          </Nav>
+          <Nav>
+            <NavLink
+              to="/collections/category/Clearance"
+              style={{ fontSize: 18, marginLeft: 10 }}
+              id="item-menu-header-main"
+              eventKey="2"
+              title="Item"
+              onMouseLeave={handleMouseLeave}
+            >
+              CLEARANCE
+            </NavLink>
+          </Nav>
+        </Nav>
+        <div
+          style={{ display: isTablet ? "none" : "flex", background: "#f8f9fa" }}
+        >
+          {isHovered && (
+            <>
+              <div style={{ width: "24%" }}>
+                <ListGroup>
+                  {isHoveredBrand &&
+                    listBrand.map((item, index) => (
+                      <ListGroup.Item
+                        style={{
+                          fontWeight: "500",
+                          fontSize: 18,
+                        }}
+                        action
+                        ref={(el) => (itemRefs.current[index] = el)}
+                        variant="light"
+                        onMouseEnter={() => handleMouseEnterItem(index)}
+                      >
+                        {item}
+                      </ListGroup.Item>
+                    ))}
+                  {isHoveredCategory &&
+                    listCategory.map((item, index) => (
+                      <ListGroup.Item
+                        style={{
+                          fontWeight: "500",
+                          fontSize: 18,
+                        }}
+                        action
+                        ref={(el) => (itemRefs.current[index] = el)}
+                        variant="light"
+                        onMouseEnter={() => handleMouseEnterItemCategory(index)}
+                      >
+                        {item}
+                      </ListGroup.Item>
+                    ))}
+                  <ListGroup.Item style={{ height: 200 }}></ListGroup.Item>
+                </ListGroup>
+              </div>
+              {isHoveredItem && (
+                <Row
+                  style={{
+                    width: "76%",
+                    height: "100%",
+                    display: "flex",
+                    marginLeft: 20,
+                  }}
+                  onMouseLeave={handleMouseLeaveItem}
+                >
+                  {" "}
+                  {listSubMenu.length > 0 &&
+                    listSubMenu?.map((item, index) => (
+                      <Col key={index} xs={12} sm={12} md={6} lg={4} xl={3}>
+                        <p style={{ marginTop: 10, fontWeight: "500" }}>
+                          {item.title}
+                        </p>
+                        <ul
+                          className="list-item-sub"
+                          style={{ listStyleType: "none" }}
                         >
-                          {item}
-                        </ListGroup.Item>
-                      ))}
-                    {isHoveredCategory &&
-                      listCategory.map((item, index) => (
-                        <ListGroup.Item
-                          style={{
-                            fontWeight: "500",
-                            fontSize: 18,
-                          }}
-                          action
-                          ref={(el) => (itemRefs.current[index] = el)}
-                          variant="light"
-                          onMouseEnter={() =>
-                            handleMouseEnterItemCategory(index)
-                          }
-                        >
-                          {item}
-                        </ListGroup.Item>
-                      ))}
-                    <ListGroup.Item style={{ height: 200 }}></ListGroup.Item>
-                  </ListGroup>
-                </div>
-                {isHoveredItem && (
-                  <Row
-                    style={{
-                      width: "76%",
-                      height: "100%",
-                      display: "flex",
-                      marginLeft: 20,
-                    }}
-                    onMouseLeave={handleMouseLeaveItem}
-                  >
-                    {" "}
-                    {listSubMenu.length > 0 &&
-                      listSubMenu?.map((item, index) => (
-                        <Col key={index} xs={12} sm={12} md={6} lg={4} xl={3}>
-                          <p style={{ marginTop: 10, fontWeight: "500" }}>
-                            {item.title}
-                          </p>
-                          <ul
-                            className="list-item-sub"
-                            style={{ listStyleType: "none" }}
-                          >
-                            {" "}
-                            {item.listitem.map((itemSub) => (
-                              <li
-                                className="item-sub-menu"
-                                style={{
-                                  height: "auto",
-                                  marginLeft: 10,
-                                  marginTop: 4,
-                                  marginBottom: 4,
-                                }}
-                              >
-                                {isHoveredBrand ? (
-                                  <NavLink
-                                    href={`/collections/brand/${
-                                      item.header + " " + itemSub
-                                    }`}
-                                  >
-                                    {itemSub}
-                                  </NavLink>
-                                ) : (
-                                  <NavLink
-                                    href={`/collections/category/${itemSub}`}
-                                  >
-                                    {itemSub}
-                                  </NavLink>
-                                )}
-                              </li>
-                            ))}
-                          </ul>
-                        </Col>
-                      ))}
-                  </Row>
-                )}
-              </>
-            )}
-          </div>
+                          {" "}
+                          {item.listitem.map((itemSub) => (
+                            <li
+                              className="item-sub-menu"
+                              style={{
+                                height: "auto",
+                                marginLeft: 10,
+                                marginTop: 4,
+                                marginBottom: 4,
+                              }}
+                            >
+                              {isHoveredBrand ? (
+                                <Link
+                                  className="id-itemsub-link"
+                                  to={`/collections/brand/${
+                                    item.header + " " + itemSub
+                                  }`}
+                                >
+                                  {itemSub}
+                                </Link>
+                              ) : (
+                                <Link
+                                  className="id-itemsub-link"
+                                  to={`/collections/category/${itemSub}`}
+                                >
+                                  {itemSub}
+                                </Link>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
+                      </Col>
+                    ))}
+                </Row>
+              )}
+            </>
+          )}
         </div>
-        <div>
-          <div class="input-group mb-3">
+        <div
+          className="d-flex"
+          style={{
+            position: "relative",
+            float: "right",
+            right: "60px",
+            top: "-30px",
+          }}
+        >
+          <div style={{ height: "40px" }}>
             <input
               type="text"
-              class="form-control"
-              placeholder="Recipient's username"
+              style={{}}
+              class="input-search-custom"
+              placeholder="Search"
               onChange={handleEnterText}
-              aria-label="Recipient's username"
+              aria-label="Search"
               aria-describedby="button-addon2"
             />
-            <button
-              class="btn btn-outline-secondary"
-              type="button"
-              id="button-addon2"
-              onClick={handleSearchText}
-            >
-              Button
-            </button>
+          </div>
+          <div
+            onClick={handleSearchText}
+            style={{
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "-20px",
+              cursor: "pointer",
+              marginBottom: "20px",
+            }}
+          >
+            <LiaSearchSolid />
           </div>
         </div>
       </div>

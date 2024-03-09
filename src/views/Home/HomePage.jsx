@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Button, Carousel } from "react-bootstrap";
+import { Button, Card, Carousel, Col, Row } from "react-bootstrap";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import "./homepage.css";
+import Slide3Item from "../../components/Slide/Slide3Item";
+import ListItem from "../../components/Recipes/ListItem";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const brandsData = [
   {
@@ -45,6 +49,8 @@ const brandsData = [
     products: [
       {
         id: "3a",
+        image:
+          "https://www.potsandpans.com/cdn/shop/files/Copy_of_anolon_logo_aubergine_400x.png?v=1666639190%20400w",
         description:
           "Rachael Ray continues to wow audiences with her special brand of authenticity, relatability, and fun. Bring on the color and convenience with Rachael Ray cookware, ceramics, bakeware, and clever gadgets designed for stylish simplicity and practicality in the kitchen. ",
       },
@@ -57,6 +63,8 @@ const brandsData = [
     products: [
       {
         id: "4a",
+        image:
+          "https://www.potsandpans.com/cdn/shop/files/Farberware_Logo_OLD_400x.png?v=1614351339%20400w",
         description:
           "Get organized with no-mess, stay-fresh containers. From essential food storage to pantry organization to meals on-the-go, LocknLock offers a range of essential container shapes and sizes in plastic and glass for airtight, leakproof, portable food storage. ",
       },
@@ -90,11 +98,12 @@ function useWindowSize() {
 function HomePage() {
   const [brandIndex, setBrandIndex] = useState(0);
   const [productIndex, setProductIndex] = useState(0);
+  const { isMobile, isTablet } = useSelector((state) => state.widthDevice);
 
   const [showVideo, setShowVideo] = useState(false);
 
-  const videoId = "9IbuIl0_NWw"; // Thay thế bằng ID video YouTube của bạn
-  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/0.jpg`; // URL thumbnail của video
+  const videoId = "pnPbiAOI_uQ"; // Thay thế bằng ID video YouTube của bạn
+  const thumbnailUrl = `https://img.youtube.com/vi/LioJGazTPcE/0.jpg`; // URL thumbnail của video
   const videoUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`; // URL video với autoplay
 
   const handleSelect = (selectedIndex, e) => {
@@ -126,23 +135,54 @@ function HomePage() {
   return (
     <main>
       <div className="bg-white">
-        <div className="position-relative">
+        <div
+          className="position-relative"
+          style={{ top: isMobile ? "-78px" : "" }}
+        >
           <img
             alt="Delicious food"
             className="img-fluid"
             src="https://www.potsandpans.com/cdn/shop/files/KitchenAid_Nitro_Carbon_Steel_Shrimp_Stir_Fry_c60d5b4c-0c23-4add-b370-e0aa403064b2_1500x.jpg?v=1706642981"
-            style={{ objectFit: "cover", width: "100%", height: "700px" }}
+            style={{
+              objectFit: "cover",
+              width: "100%",
+              height: isMobile ? "480" : "700px",
+            }}
           />
+
           <div
-            className="position-absolute top-50 start-50 p-3 bg-white shadow-lg"
-            style={{ width: "350px", transform: "translate(-80%, -45%)" }}
+            className="position-absolute  w-650 r-custom p-3 bg-white shadow-lg"
+            style={{
+              transform: "translate(-80%, -45%)",
+              top: isMobile ? "78%" : "20%",
+            }}
           >
-            <h2 className="h2 fw-bold text-dark">KitchenAid®</h2>
-            <p className="mt-2 text-muted">
-              Discover the latest cookware innovations from this iconic brand,
-              including new NITRO Carbon Steel collection.
-            </p>
-            <Button className="btn btn-primary mt-4">Learn More</Button>
+            <Card
+              style={{ width: "auto", border: "none", alignItems: "center" }}
+            >
+              <Card.Img
+                variant="top"
+                style={{ width: "45%" }}
+                src="https://www.potsandpans.com/cdn/shop/files/ka_refined__C41230_400x_14935a16-b2d5-48d3-a9ce-64fd00117485_600x.png?v=1635247665"
+              />
+              <Card.Body>
+                <Card.Text style={{ textAlign: "center" }}>
+                  Discover the latest cookware innovations from this iconic
+                  brand, including new NITRO Carbon Steel collection.
+                </Card.Text>
+                <center>
+                  <Link to="/kitchenaid">
+                    <button
+                      type="button"
+                      className="button-custom"
+                      style={{ borderWidth: 0 }}
+                    >
+                      Learn More
+                    </button>
+                  </Link>
+                </center>
+              </Card.Body>
+            </Card>
           </div>
         </div>
         <div className="mt-5 d-flex flex-column align-items-center">
@@ -177,16 +217,18 @@ function HomePage() {
             src={selectedProduct?.image}
             alt={`Product of ${selectedBrand?.name}`}
           />
-          <div style={{ maxWidth: "40%", textAlign: "center" }}>
+          <div
+            style={{ maxWidth: isMobile ? "65%" : "40%", textAlign: "center" }}
+          >
             <p>{selectedProduct?.description}</p>
-            <button className="shop-now-btn button-customs  ">Shop Now</button>
+            <button className="shop-now-btn button-custom">Shop Now</button>
           </div>
         </div>
         <div className="youtube-video-container" style={{ margin: "20px 0" }}>
           {!showVideo ? (
             <img
               src={thumbnailUrl}
-              width="100%"
+              width="80%"
               alt="Video Thumbnail"
               style={{ cursor: "pointer" }}
               onClick={() => setShowVideo(true)}
@@ -203,6 +245,178 @@ function HomePage() {
             ></iframe>
           )}
         </div>
+        <div className="category-slide">
+          <center>
+            <h2 style={{ fontSize: "36px" }} className="title-custom">
+              Shop by Category
+            </h2>
+          </center>
+          <Slide3Item />
+        </div>
+        <div style={{ marginTop: isMobile ? "100px" : "" }}>
+          <Row
+            xs={12}
+            className="w-full justify-content-center"
+            style={{
+              marginTop: "50px",
+              marginLeft: "50px",
+              marginRight: "50px",
+            }}
+          >
+            <Col
+              xs={isMobile ? 12 : 4}
+              md={isMobile ? 12 : 4}
+              className="mb-4"
+              style={{ position: "relative", top: isMobile ? 120 : 0 }}
+            >
+              <span>WHAT'S NEW</span>
+              <h2>Our Latest Releases</h2>
+              <p>
+                Check back here for the newest offerings in quality cookware,
+                bakeware, food storage, and more.
+              </p>
+            </Col>
+            <Col xs={6} md={4} className="mb-4">
+              <div className="d-block">
+                <img
+                  style={{
+                    height: isTablet ? "238px" : "435px",
+                    width: isTablet ? "228px" : "400px",
+                    marginBottom: "10px",
+                    paddingRight: 10,
+                  }}
+                  src="https://www.potsandpans.com/cdn/shop/files/PNG-48874_KA_KKG_8.5_open_frying_pan_nonstick_enhanced_1_2_750x.png?v=1704736332"
+                  alt="Firstimage"
+                />
+                <span>NITRO Carbon Steel Cookware</span>
+              </div>
+            </Col>
+            <Col xs={6} md={4} className="mb-4">
+              <div className="d-block">
+                <img
+                  style={{
+                    height: isTablet ? "238px" : "435px",
+                    width: isTablet ? "228px" : "400px",
+                    marginBottom: "10px",
+                  }}
+                  src="https://www.potsandpans.com/cdn/shop/files/Untitled_design_39_750x.png?v=1686945299"
+                  alt="Twomage"
+                />
+                <span style={{}}>Hard Anodized Ceramic Cookware</span>
+              </div>
+            </Col>
+            {isMobile && (
+              <Col xs={6} md={4} className="mb-4">
+                <div className="d-block">
+                  <img
+                    style={{
+                      height: isTablet ? "238px" : "435px",
+                      width: isTablet ? "228px" : "400px",
+                      marginBottom: "10px",
+                    }}
+                    src="https://www.potsandpans.com/cdn/shop/files/Untitled_design_-_2022-06-01T195517.496_750x.png?v=1654138541"
+                    alt="Twomage"
+                  />
+                  <span style={{}}>Hard Anodized Ceramic Cookware</span>
+                </div>
+              </Col>
+            )}
+          </Row>
+          {/* <Row
+            xs={12}
+            className="w-full justify-content-center"
+            style={{
+              marginTop: "50px",
+              marginLeft: "50px",
+              marginRight: "50px",
+            }}
+          >
+            <Col
+              xs={isMobile ? 3 : 4}
+              className="mb-4"
+              style={{ position: "relative", top: 120 }}
+            >
+              <span>WHAT'S NEW</span>
+              <h2>Our Latest Releases</h2>
+              <p>
+                Check back here for the newest offerings in quality cookware,
+                bakeware, food storage, and more.
+              </p>
+            </Col>
+            <Col xs={isMobile ? 3 : 4} className="mb-4">
+              <div className="d-block">
+                <img
+                  style={{
+                    height: isTablet ? "238px" : "435px",
+                    width: isTablet ? "228px" : "400px",
+                    marginBottom: "10px",
+                    paddingRight: 10,
+                  }}
+                  src="https://www.potsandpans.com/cdn/shop/files/PNG-48874_KA_KKG_8.5_open_frying_pan_nonstick_enhanced_1_2_750x.png?v=1704736332"
+                  alt="Firstimage"
+                />
+                <span>NITRO Carbon Steel Cookware</span>
+              </div>
+            </Col>
+            <Col xs={isMobile ? 3 : 4} className="mb-4">
+              <div className="d-block">
+                <img
+                  style={{
+                    height: isTablet ? "238px" : "435px",
+                    width: isTablet ? "228px" : "400px",
+                    marginBottom: "10px",
+                  }}
+                  src="https://www.potsandpans.com/cdn/shop/files/Untitled_design_39_750x.png?v=1686945299"
+                  alt="Twomage"
+                />
+                <span style={{}}>Hard Anodized Ceramic Cookware</span>
+              </div>
+            </Col>
+            {isMobile && (
+              <Col xs={3} className="mb-4">
+                <div className="d-block">
+                  <img
+                    style={{
+                      height: isTablet ? "238px" : "435px",
+                      width: isTablet ? "228px" : "400px",
+                      marginBottom: "10px",
+                    }}
+                    src="https://www.potsandpans.com/cdn/shop/files/Untitled_design_-_2022-06-01T195517.496_750x.png?v=1654138541"
+                    alt="Twomage"
+                  />
+                  <span style={{}}>Hard Anodized Ceramic Cookware</span>
+                </div>
+              </Col>
+            )}
+          </Row> */}
+        </div>
+        <div>
+          <center>
+            <h2 style={{ fontSize: "36px" }} className="title-custom">
+              Recipes For Right Now...
+            </h2>
+          </center>
+
+          <div>
+            <ListItem count={3} />
+          </div>
+        </div>
+        <center>
+          <Link to="/recipes">
+            <button
+              type="button"
+              className="button-custom"
+              style={{
+                borderWidth: 0,
+                fontSize: "13px",
+                justifyContent: "center",
+                marginBottom: "50px",
+              }}
+            >
+              VIEW ALL RECIPES
+            </button>
+          </Link>
+        </center>
       </div>
     </main>
   );

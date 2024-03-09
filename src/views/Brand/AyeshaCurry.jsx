@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Carousel, Col, NavLink, Row } from "react-bootstrap";
+import { Button, Carousel, Col, Row } from "react-bootstrap";
 import data from "../../Mock/exportproduct.json";
+import { Link } from "react-router-dom";
 
 function AyeshaCurry() {
   function getProductFromCategory(data, categories) {
@@ -484,7 +485,7 @@ function AyeshaCurry() {
             marginTop: 10,
           }}
         >
-          <NavLink href="/ayesha-curry">SHOP ALL AYESHA CURRY</NavLink>
+          <Link to="/ayesha-curry">SHOP ALL AYESHA CURRY</Link>
         </Button>
       </center>
     </div>
