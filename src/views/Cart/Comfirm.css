@@ -4,14 +4,14 @@
 }
 
 .item-status-cart {
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "FreightText", sans-serif !important;
   font-weight: 400;
 }
 .item-status-cart.main {
   font-weight: 600;
 }
 .title-ex {
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "FreightText", sans-serif !important;
   font-weight: 400;
   font-weight: 13px;
 }
@@ -24,7 +24,7 @@
   margin-right: 10px;
 }
 .text-main {
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "FreightText", sans-serif !important;
   font-size: 13px;
   color: #dee4ed;
 }
@@ -39,19 +39,31 @@
 
 .btn-paypal {
   background-color: #ffc439;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.btn-paypal:hover {
+  background-color: #ffc439;
+  opacity: 1;
 }
 
 .btn-stripe {
-  background-color: #592ff4;
+  background-color: #eae9f0;
+  opacity: 0.8;
+  cursor: pointer;
+}
+.btn-stripe:hover {
+  background-color: #cfced5;
+  opacity: 1;
 }
 
 .title-confirm {
   font-size: 18px;
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "FreightText", sans-serif !important;
   font-weight: 600;
 }
 .login-confirm {
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "FreightText", sans-serif !important;
   font-weight: 400;
   font-size: 13px;
   text-decoration: underline;
@@ -60,7 +72,7 @@
 .input-confirm {
   font-size: 13px;
   font-weight: 400;
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "FreightText", sans-serif !important;
   height: 46px;
 }
 .mt-a8 {
@@ -74,17 +86,17 @@
   font-size: 12px !important;
   font-weight: 500;
   height: 40px;
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "FreightText", sans-serif !important;
 }
 .fz-12 {
   font-size: 12px !important;
   font-weight: 500;
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "FreightText", sans-serif !important;
 }
 .fz-13 {
   font-size: 13px !important;
   font-weight: 500;
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "FreightText", sans-serif !important;
 }
 .icon-search-confirm {
   float: right;
@@ -114,7 +126,7 @@
   display: inline-block;
   font-size: 10px !important;
   font-weight: 500;
-  font-family: "Quicksand", sans-serif !important;
+  font-family: "FreightText", sans-serif !important;
   margin: 0;
   padding: 0;
 }

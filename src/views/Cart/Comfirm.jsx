@@ -424,21 +424,20 @@ function Comfirm() {
                 className="d-flex"
                 style={{ justifyContent: "space-around", width: "100%" }}
               >
-                <button
-                  className="btn-confirm btn-paypal"
-                  style={{ width: isTablet ? "160px" : "" }}
-                  src={`${process.env.PUBLIC_URL}/image/paypal.jpg`}
-                  alt="paypal"
-                >
-                  PayPal
-                </button>
-                <button
-                  style={{ width: isTablet ? "160px" : "" }}
-                  className=" btn-confirm btn-stripe"
-                  alt="stripe"
-                >
-                  Stripe
-                </button>
+                <div className="btn-confirm btn-paypal btn-payment container-custom ">
+                  <img
+                    style={{ width: "75px" }}
+                    src={`${process.env.PUBLIC_URL}/image/paypallogo.png`}
+                    alt="paypal"
+                  />
+                </div>
+                <div className="btn-confirm btn-stripe btn-payment container-custom ">
+                  <img
+                    style={{ width: "75px" }}
+                    src={`${process.env.PUBLIC_URL}/image/stripelogo.png`}
+                    alt="stripe"
+                  />
+                </div>
               </div>
               <div
                 className="d-flex"
@@ -463,7 +462,7 @@ function Comfirm() {
                   </Form.Label>
                   <Form.Control
                     type="email"
-                    className="input-confirm mt-a8"
+                    className="input-confirm mt-a8 fz-12"
                     placeholder="Email or mobile phone number"
                   />
                   <Form.Group

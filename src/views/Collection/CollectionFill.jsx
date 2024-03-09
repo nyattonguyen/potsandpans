@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import "./CollectionFill.css";
-import { Pagination } from "react-bootstrap";
+import { Form, Pagination } from "react-bootstrap";
 import productList from "../../Mock/exportproduct.json";
 import { Link, useParams } from "react-router-dom";
 
@@ -14,6 +14,8 @@ export default function CollectionFill() {
   const [openMaterial, setOpenMaterial] = useState(true);
   const [productsOnSale, setProductsOnSale] = useState([]);
   const [titlePage, setTitlePage] = useState("");
+  const [filterSelect, setFilterSelect] = useState("Relevance");
+
   const productsPerPage = 16;
   function capitalizeFirstLetter(str) {
     let title = str.charAt(0).toUpperCase() + str.slice(1);
@@ -41,19 +43,6 @@ export default function CollectionFill() {
     { name: "Ovenware", count: 3 },
     { name: "Salt Box", count: 2 },
   ];
-
-  const brands = [
-    { name: "Anolon", count: 7 },
-    { name: "Ayesha Curry", count: 47 },
-    { name: "Circulon", count: 7 },
-    { name: "Farberware", count: 1 },
-    { name: "Farberware-Clearance", count: 3 },
-    { name: "LocknLock", count: 24 },
-    { name: "Rachael Ray", count: 4 },
-    { name: "Rachael Ray", count: 4 },
-    { name: "LocknLock", count: 24 },
-  ];
-
   const materials = [
     { name: "Ceramics", count: 1 },
     { name: "Damascus", count: 1 },
@@ -67,10 +56,93 @@ export default function CollectionFill() {
     { name: "Glass-Borosilicate", count: 1 },
   ];
 
+  const brands = [
+    { name: "Anolon", count: 7 },
+    { name: "Ayesha Curry", count: 47 },
+    { name: "Circulon", count: 7 },
+    { name: "Farberware", count: 1 },
+    { name: "Farberware-Clearance", count: 3 },
+    { name: "LocknLock", count: 24 },
+    { name: "Rachael Ray", count: 4 },
+    { name: "Rachael Ray", count: 4 },
+    { name: "LocknLock", count: 24 },
+  ];
+
+  const [brandArray, setBrandArry] = useState([]);
+
+  useMemo(() => {
+    if (filterSelect == "Price ascending") {
+      var productListSort = listProductBrand.sort((a, b) => a.price - b.price);
+      setProductsOnSale(productListSort);
+    } else if (filterSelect == "Price descending") {
+      var productListSort = listProductBrand.sort((a, b) => b.price - a.price);
+      setProductsOnSale(productListSort);
+    } else if (filterSelect == "Title ascending") {
+      var productListSort = listProductBrand.sort((a, b) => {
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+        if (!isNaN(nameA.charAt(0)) && !isNaN(nameB.charAt(0))) {
+          return parseFloat(nameA) - parseFloat(nameB);
+        } else if (!isNaN(nameA.charAt(0))) {
+          return 1;
+        } else if (!isNaN(nameB.charAt(0))) {
+          return -1;
+        } else {
+          if (nameA < nameB) return -1;
+          if (nameA > nameB) return 1;
+          return 0;
+        }
+      });
+      setProductsOnSale(productListSort);
+    } else if (filterSelect == "Title descending") {
+      var productListSort = listProductBrand.sort((a, b) => {
+        const nameA = a.name.toLowerCase();
+        const nameB = b.name.toLowerCase();
+        if (!isNaN(nameA.charAt(0)) && !isNaN(nameB.charAt(0))) {
+          return parseFloat(nameB) - parseFloat(nameA);
+        } else if (!isNaN(nameA.charAt(0))) {
+          return -1;
+        } else if (!isNaN(nameB.charAt(0))) {
+          return 1;
+        } else {
+          if (nameA < nameB) return 1;
+          if (nameA > nameB) return -1;
+          return 0;
+        }
+      });
+
+      setProductsOnSale(productListSort);
+    } else if (filterSelect == "New Arrivals") {
+      var productListSort = listProductBrand.filter((element) =>
+        element.categories.some((category) => category == "New Arrivals")
+      );
+
+      setProductsOnSale(productListSort);
+    } else if (filterSelect == "Best Sellers") {
+      var productListSort = listProductBrand.filter((element) =>
+        element.categories.some((category) => category == "Best Sellers")
+      );
+
+      setProductsOnSale(productListSort);
+    } else {
+      var lowercaseId = id.toLowerCase();
+      var productsArray = Array.from(productList.products);
+
+      var filteredProducts = productsArray.filter((element) =>
+        element.categories.some((category) =>
+          category.toLowerCase().includes(lowercaseId)
+        )
+      );
+
+      setListProductBrand(filteredProducts);
+      setProductsOnSale(filteredProducts);
+    }
+  }, [filterSelect]);
+
   useEffect(() => {
-    capitalizeFirstLetter(id.toLowerCase());
     var lowercaseId = id.toLowerCase();
     var productsArray = Array.from(productList.products);
+
     var filteredProducts = productsArray.filter((element) =>
       element.categories.some((category) =>
         category.toLowerCase().includes(lowercaseId)
@@ -80,22 +152,6 @@ export default function CollectionFill() {
     setListProductBrand(filteredProducts);
     setProductsOnSale(filteredProducts);
   }, [id]);
-  const brandArray = [];
-
-  // filter by brand
-  const handleBrandChange = (brand, checked) => {
-    if (checked) {
-      console.log(brand.name);
-      brandArray.push(brand.name);
-    } else {
-      const index = brandArray.indexOf(brand.name);
-      if (index > -1) {
-        brandArray.splice(index, 1);
-      }
-    }
-  };
-
-  // console.log("day ne da ", brandArray);
 
   // Tính toán tổng số trang
   const pageCount = Math.ceil(productsOnSale.length / productsPerPage);
@@ -134,6 +190,23 @@ export default function CollectionFill() {
         <header className="fw-medium fs-3">{titlePage}</header>
       </div>
       <div className="container-fluid">
+        <div className="">
+          <Form.Select
+            size="lg"
+            id="select-custom"
+            onChange={(e) => setFilterSelect(e.target.value)}
+            value={filterSelect}
+          >
+            <option>SORT</option>
+            <option value="New Arrivals">New Arrivals</option>
+            <option value="Best Sellers">Best Sellers</option>
+            <option value="Relevance">Relevance</option>
+            <option value="Price ascending">Price ascending</option>
+            <option value="Price descending">Price descending</option>
+            <option value="Title ascending">Title ascending</option>
+            <option value="Title descending">Title descending</option>
+          </Form.Select>
+        </div>
         <div className="row">
           <div className="col-md-4 col-lg-3">
             {/* Category */}
@@ -195,9 +268,6 @@ export default function CollectionFill() {
                         className="form-check-input"
                         type="checkbox"
                         id={`brand-${index}`}
-                        onChange={(e) =>
-                          handleBrandChange(brand, e.target.checked)
-                        }
                       />
                       <label
                         className="form-check-label d-flex justify-content-between align-items-center w-100"
@@ -302,7 +372,9 @@ export default function CollectionFill() {
                 ))
               ) : (
                 <center>
-                  <h3>There are no products in this category</h3>
+                  <h3 className="no-product">
+                    There are no products in this category
+                  </h3>
                 </center>
               )}
             </div>

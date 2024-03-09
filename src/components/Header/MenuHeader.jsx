@@ -5,9 +5,12 @@ import categories from "../../Mock/subcategory2.json";
 import { LiaSearchSolid } from "react-icons/lia";
 import { useDispatch } from "react-redux";
 import { updateItemSearch } from "../../Redux/Slices/ItemSearch";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
+import "./Header.css";
+import { updateLinkCurrentHeader } from "../../Redux/Slices/TitleLink";
 
 function MenuHeader({ isTablet, isMobile }) {
+  const id = useParams();
   const [isHovered, setIsHovered] = useState(false);
   const [isHoveredItem, setIsHoveredItem] = useState(false);
   const [isHoveredBrand, setIsHoveredBrand] = useState(false);
@@ -17,9 +20,15 @@ function MenuHeader({ isTablet, isMobile }) {
   const [itemContent, setItemContent] = useState(null);
   const itemRefs = useRef([]);
   const [text, setText] = useState("");
+  const [active, setActive] = useState(false);
 
   const listBrand = [];
   const listCategory = [];
+
+  const handleUpdateLink = (title) => {
+    setActive(true);
+    dispatch(updateLinkCurrentHeader());
+  };
 
   const dispatch = useDispatch();
 
@@ -124,46 +133,45 @@ function MenuHeader({ isTablet, isMobile }) {
   }, [itemContent]);
 
   return (
-    <div className="w-full">
-      <div
-        style={{
-          height: 1,
-          background: "gray",
-        }}
-      ></div>
-
+    <div
+      className="w-full submenu-main"
+      style={{ height: "66.6px", background: "#ffffff" }}
+    >
       <div style={{}}>
         <Nav
           id="list-item-menu-header-main"
           variant="pills"
           activeKey="1"
           style={{
-            marginLeft: "90px",
             display: "flex",
           }}
         >
-          <Nav.Item>
-            <NavLink
-              to="/shop-by-brand"
-              id="item-menu-header-main"
-              style={{ fontSize: 18, marginLeft: 10 }}
-              eventKey="2"
-              title="Item"
-              onMouseEnter={handleHoverBrand}
-            >
-              BRANDS
-            </NavLink>
-          </Nav.Item>
+          <NavLink
+            to="/shop-by-brand"
+            id="item-menu-header-main"
+            style={{ fontSize: 18, marginLeft: 10 }}
+            eventKey="1"
+            title="Item"
+            onMouseEnter={handleHoverBrand}
+          >
+            BRANDS
+            <div
+              className={`${
+                active ? "line-underline-active" : "line-underline"
+              }`}
+            ></div>
+          </NavLink>
           <Nav>
             <NavLink
               to="/shop-by-category"
               style={{ fontSize: 18, marginLeft: 10 }}
               id="item-menu-header-main"
-              eventKey="2"
+              eventKey="3"
               title="Item"
               onMouseEnter={handleHoverCategory}
             >
               CATEGORIES
+              <div className="line-underline"></div>
             </NavLink>
           </Nav>
           <Nav>
@@ -171,11 +179,12 @@ function MenuHeader({ isTablet, isMobile }) {
               to="/recipes"
               style={{ fontSize: 18, marginLeft: 10 }}
               id="item-menu-header-main"
-              eventKey="2"
+              eventKey="4"
               title="Item"
               onMouseLeave={handleMouseLeave}
             >
               RECIPES
+              <div className="line-underline"></div>
             </NavLink>
           </Nav>
           <Nav>
@@ -183,11 +192,12 @@ function MenuHeader({ isTablet, isMobile }) {
               to="/collections/category/New Arrivals"
               style={{ fontSize: 18, marginLeft: 10 }}
               id="item-menu-header-main"
-              eventKey="2"
+              eventKey="5"
               title="Item"
               onMouseLeave={handleMouseLeave}
             >
               NEW
+              <div className="line-underline"></div>
             </NavLink>
           </Nav>
           <Nav>
@@ -195,16 +205,23 @@ function MenuHeader({ isTablet, isMobile }) {
               to="/collections/category/Clearance"
               style={{ fontSize: 18, marginLeft: 10 }}
               id="item-menu-header-main"
-              eventKey="2"
+              eventKey="6"
               title="Item"
               onMouseLeave={handleMouseLeave}
             >
               CLEARANCE
+              <div className="line-underline"></div>
             </NavLink>
           </Nav>
         </Nav>
         <div
-          style={{ display: isTablet ? "none" : "flex", background: "#f8f9fa" }}
+          style={{
+            display: isTablet ? "none" : "flex",
+            background: "#f8f9fa",
+            width: "110%",
+            marginLeft: "-60px",
+            marginTop: "20px",
+          }}
         >
           {isHovered && (
             <>
@@ -217,6 +234,7 @@ function MenuHeader({ isTablet, isMobile }) {
                           fontWeight: "500",
                           fontSize: 18,
                         }}
+                        id="item-sub"
                         action
                         ref={(el) => (itemRefs.current[index] = el)}
                         variant="light"
@@ -233,6 +251,7 @@ function MenuHeader({ isTablet, isMobile }) {
                           fontSize: 18,
                         }}
                         action
+                        id="item-sub"
                         ref={(el) => (itemRefs.current[index] = el)}
                         variant="light"
                         onMouseEnter={() => handleMouseEnterItemCategory(index)}
@@ -257,7 +276,10 @@ function MenuHeader({ isTablet, isMobile }) {
                   {listSubMenu.length > 0 &&
                     listSubMenu?.map((item, index) => (
                       <Col key={index} xs={12} sm={12} md={6} lg={4} xl={3}>
-                        <p style={{ marginTop: 10, fontWeight: "500" }}>
+                        <p
+                          style={{ marginTop: 10, fontWeight: "500" }}
+                          className="item-submenu-header"
+                        >
                           {item.title}
                         </p>
                         <ul

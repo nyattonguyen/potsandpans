@@ -14,13 +14,15 @@
 }
 
 .header-container .logo img {
-  width: 250px;
-  transition: width 0.3s ease; /* Đảm bảo chuyển đổi mượt mà */
+  width: 350px;
+  height: 103px;
+  transition: width 0.4s ease; /* Đảm bảo chuyển đổi mượt mà */
 }
 
 /* Điều chỉnh lại để logo và header thực sự nhỏ hơn khi cuộn */
 .header-scrolled .logo img {
-  width: 125px; /* Giảm kích thước logo xuống 50% */
+  width: 262.5px; /* Giảm kích thước logo xuống 50% */
+  height: 77.25px;
 }
 
 .header-scrolled {
@@ -77,12 +79,40 @@
   text-decoration: none;
   color: black;
   font-weight: 500;
-  font-family: "Quicksand", serif;
-  margin-top: 6px;
+  font-family: "FreightText", serif;
+  margin: 0 40px 0 0;
 }
 .id-itemsub-link {
   text-decoration: none;
   color: black;
   font-weight: 500;
-  font-family: "Quicksand", serif;
+  font-family: "FreightText", serif;
+}
+.submenu-main {
+  padding: 16px 60px 19px;
+  background-color: #ffffff;
+  border: none;
+  border-top: 1px solid #a09a9a;
+}
+.line-underline {
+  overflow: hidden;
+}
+
+.line-underline {
+  position: relative;
+  height: 1px;
+  width: 0%;
+  background-color: rgb(3, 3, 4); /* Màu của line-underline */
+  transition: width 0.3s ease; /* Hiệu ứng transition cho line-underline */
+}
+
+#item-menu-header-main:hover .line-underline {
+  width: 100%; /* Khi hover vào NavLink, độ dài của line-underline sẽ là 100% */
+}
+.line-underline-active {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  background-color: rgb(3, 3, 4); /* Màu của line-underline */
+  transition: width 0.3s ease;
 }

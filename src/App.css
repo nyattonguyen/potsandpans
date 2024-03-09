@@ -50,3 +50,7 @@
   border: 1px solid #949494;
   border-radius: 2pxs;
 }
+.btn-payment {
+  width: 178px;
+  height: 48px;
+}

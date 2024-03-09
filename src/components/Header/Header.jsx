@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { FaShoppingCart } from "react-icons/fa";
 import "./Header.css";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  Offcanvas,
-} from "react-bootstrap";
+import { Container, Navbar, Nav } from "react-bootstrap";
 import { FaBars } from "react-icons/fa6";
-import { NavDropdownMenu } from "react-bootstrap-submenu";
 import "react-bootstrap-submenu/dist/index.css";
 import MenuHeader from "./MenuHeader";
 import { CiShoppingBasket } from "react-icons/ci";
@@ -75,9 +67,15 @@ function Header() {
 
   return (
     <Navbar
-      bg="light"
       expand="lg"
-      style={{ display: "block", maxHeight: "136px" }}
+      style={{
+        display: "block",
+        maxHeight: "136px",
+        backgroundColor: "#ffffff",
+        border: "none",
+        borderBottom: 1,
+        borderColor: "black",
+      }}
       variant="white"
       className={headerClass}
       onToggle={toggleNav}
@@ -91,6 +89,7 @@ function Header() {
           style={{
             margin: isTablet ? "auto" : "",
             justifyContent: isMobile ? "center" : "",
+            marginLeft: "-50px",
           }}
         >
           <div
@@ -115,7 +114,7 @@ function Header() {
             {!isTablet && (
               <div className="d-flex ">
                 <Nav.Link style={{ fontSize: 15 }} href="/signin">
-                  LogIn/SignUp
+                  Login / Sign up
                 </Nav.Link>
                 <div
                   style={{

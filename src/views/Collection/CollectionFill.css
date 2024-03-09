@@ -63,14 +63,30 @@
 .fz-18 {
   font-weight: 500;
   font-size: 18px !important;
-  font-family: "Vollkorn", serif !important;
+  font-family: "FreightText", serif !important;
 }
 .fz-24 {
   font-weight: 500;
   font-size: 24px !important;
-  font-family: "Quicksand", serif;
+  font-family: "FreightText", serif;
 }
 
 #item-product {
   text-decoration: none;
+}
+#select-custom {
+  width: 190px;
+  float: right;
+  margin-right: 28px;
+  border: none;
+  border-bottom: 1px solid;
+  border-radius: 0;
+  outline: none;
+  font-size: 16px;
+  font-weight: 300;
+  font-family: "FreightText", serif !important;
+}
+
+.no-product {
+  font-family: "FreightText", sans-serif;
 }

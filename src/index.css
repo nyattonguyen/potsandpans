@@ -19,6 +19,11 @@ code {
     url("../public/Circe/CRC55.otf") format("woff2");
   /* Các định dạng file font khác có thể được thêm vào đây */
 }
+@font-face {
+  font-family: "FreightText";
+  src: url("../public/FreightText/FreightTextBook.otf") format("woff");
+  /* Các định dạng file font khác có thể được thêm vào đây */
+}
 
 @keyframes fadeOutLeft {
   from {
